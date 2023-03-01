@@ -1,0 +1,68 @@
+syntax = "proto3";
+option go_package = "/";
+ 
+message Movie {
+    string id = 1;
+    string name = 2;
+    string desc = 3;
+}
+
+message GetMovieRequest {
+    string id = 1;
+}
+
+message GetMovieResponse {
+    bool status = 1;
+    Movie data = 2;
+}
+
+message AddMovieRequest {
+    Movie movie = 1;
+}
+
+message AddMovieResponse {
+    bool status = 1;
+    Movie data = 2;
+}
+
+message UpdateMovieRequest {
+    Movie movie = 1;
+}
+
+message UpdateMovieResponse {
+    bool status = 1;
+    Movie data = 2;
+}
+
+message DeleteMovieRequest { 
+    string book_id = 1; 
+}
+
+message DeleteMovieResponse { 
+    bool status = 1; 
+}
+
+message GetMoviesRequest {}
+
+message GetMoviesResponse {
+  bool status = 1;
+  Movie data = 2;
+}
+
+message AddBatchMovieRequest { 
+    Movie movie = 1; 
+}
+
+message AddBatchMovieResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+service MovieService {
+    rpc GetMovie(GetMovieRequest) returns (GetMovieResponse) {};
+    rpc AddMovie(AddMovieRequest) returns (AddMovieResponse) {};
+    rpc UpdateMovie(UpdateMovieRequest) returns (UpdateMovieResponse) {};
+    rpc DeleteMovie(DeleteMovieRequest) returns (DeleteMovieResponse) {};
+    rpc GetMovies(GetMoviesRequest) returns (stream GetMoviesResponse) {};
+    rpc AddBatchMovie(stream AddBatchMovieRequest) returns (AddBatchMovieResponse) {};
+}
